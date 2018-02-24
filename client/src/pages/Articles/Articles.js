@@ -44,11 +44,12 @@ class Articles extends Component {
     .catch(err => console.log(err));
 
   }
-  saveArticle = event =>{
-    var aticleId= event.target.value
+  saveArticle = i =>{
+    //var aticleId= event.target.value
     API.saveArticle({
-
-    })
+      topic: this.state.results[i].headline.main,
+      url: this.state.results[i].web_url
+    }).then(res => alert("Article saved to db")).catch(err => console.log(err));
   }
 
   // apiSave = id => {
@@ -113,7 +114,7 @@ class Articles extends Component {
               <h1>Results</h1>
               {this.state.results.length ? (
               <List>
-                {this.state.results.map(result => {
+                {this.state.results.map((result,i) => {
                   return (
                     <ListItem key={result._id}>
                       <a href={result.web_url} target = "_blank">
@@ -121,7 +122,7 @@ class Articles extends Component {
                           {result.headline.main}
                         </strong>
                       </a>
-                      <Button value = {result._id} onClick={() => this.saveArticle} >Save</Button>
+                      <Button value = {result._id} onClick={() => this.saveArticle(i)} >Save</Button>
                     </ListItem>
                   )
                 })}

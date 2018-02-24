@@ -25,6 +25,7 @@ var deleteArticle =  function(id) {
 }
 // Saves a article to the database
 var saveArticle = function(articleData) {
+  console.log("inside saving into db");
   return axios.post("/api/articles", articleData);
 }
 
